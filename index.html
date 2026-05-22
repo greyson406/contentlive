@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ContentLabs 运营操作手册</title>
+  <meta name="description" content="ContentLabs 后台管理系统 · 运营操作手册">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📘</text></svg>">
+
+  <!-- docsify 默认 vue 主题（本地） -->
+  <link rel="stylesheet" href="vendor/vue.css">
+
+  <style>
+    /* ============ 字体 ============ */
+    :root {
+      --brand:        #2E6FB5;
+      --brand-dark:   #1E5A9C;
+      --brand-soft:   #EAF1FA;
+      --ink:          #1f2933;
+      --ink-soft:     #52606d;
+      --line:         #e4e7eb;
+      --bg:           #ffffff;
+      --code-bg:      #f4f5f7;
+
+      --theme-color:  var(--brand);
+      --sidebar-width: 18rem;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+        "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC",
+        "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============ 侧边栏 ============ */
+    .sidebar {
+      background: #fafbfc;
+      border-right: 1px solid var(--line);
+      padding-top: 0;
+    }
+    .sidebar > h1 {
+      margin: 0;
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+    .sidebar > h1 a {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .sidebar-nav {
+      padding: 1rem 0.5rem 3rem;
+      line-height: 1.7;
+    }
+    /* 分组标题（粗体项） */
+    .sidebar-nav > ul > li > strong,
+    .sidebar-nav > ul > li > p > strong {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: none;
+      color: #9aa5b1;
+      padding: 0.9rem 0.75rem 0.3rem;
+      margin: 0;
+    }
+    .sidebar-nav li a {
+      color: var(--ink-soft);
+      border-radius: 6px;
+      padding: 0.32rem 0.75rem;
+      display: block;
+      transition: all .15s ease;
+      font-size: 0.92rem;
+    }
+    .sidebar-nav li a:hover {
+      background: var(--brand-soft);
+      color: var(--brand-dark);
+      text-decoration: none;
+    }
+    .sidebar-nav li.active > a {
+      background: var(--brand);
+      color: #fff !important;
+      font-weight: 600;
+      border-right: none;
+    }
+
+    /* ============ 正文 ============ */
+    .markdown-section {
+      max-width: 50rem;
+      padding: 2.2rem 2.4rem 4rem;
+    }
+    .markdown-section h1 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--ink);
+      border-bottom: 3px solid var(--brand);
+      padding-bottom: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .markdown-section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--brand-dark);
+      margin-top: 2.4rem;
+      padding-top: 0.6rem;
+    }
+    .markdown-section h3 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-top: 1.8rem;
+    }
+    .markdown-section h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink-soft);
+    }
+    .markdown-section p,
+    .markdown-section li {
+      line-height: 1.8;
+      color: #323f4b;
+    }
+    .markdown-section a { color: var(--brand); }
+    .markdown-section strong { color: var(--ink); }
+
+    /* 行内 code */
+    .markdown-section code {
+      background: var(--code-bg);
+      color: #c0341d;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.86em;
+      font-family: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, Menlo, monospace;
+    }
+    /* 代码块 */
+    .markdown-section pre {
+      background: #f7f8fa;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .markdown-section pre > code {
+      color: #2d3748;
+      background: transparent;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    /* ============ 表格 ============ */
+    .markdown-section table {
+      display: table;
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 0.9rem;
+      margin: 1.2rem 0;
+    }
+    .markdown-section th {
+      background: var(--brand-soft);
+      color: var(--ink);
+      font-weight: 700;
+      border: 1px solid var(--line);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+    .markdown-section td {
+      border: 1px solid var(--line);
+      padding: 0.55rem 0.85rem;
+      vertical-align: top;
+    }
+    .markdown-section tr:nth-child(2n) td { background: #fbfcfd; }
+
+    /* ============ 引用块 → 提示框 ============ */
+    .markdown-section blockquote {
+      margin: 1.2rem 0;
+      padding: 0.85rem 1.1rem;
+      border-radius: 8px;
+      border-left: 4px solid #b8c2cc;
+      background: #f6f8fa;
+      color: #3a4654;
+    }
+    .markdown-section blockquote p { margin: 0.3em 0; color: inherit; }
+    .markdown-section blockquote p:first-child { margin-top: 0; }
+    .markdown-section blockquote p:last-child { margin-bottom: 0; }
+    /* 按 emoji 着色（JS 注入 class） */
+    blockquote.cl-warn { border-left-color: #d7483b; background: #fdeceb; }
+    blockquote.cl-tip  { border-left-color: #e0a800; background: #fff8e6; }
+    blockquote.cl-note { border-left-color: var(--brand); background: var(--brand-soft); }
+    blockquote.cl-key  { border-left-color: #2e8b57; background: #eaf6ee; }
+
+    /* ============ 顶部导航 ============ */
+    .app-nav {
+      margin: 1.2rem 1.5rem;
+    }
+    .app-nav a { color: var(--ink-soft); }
+    .app-nav a:hover { color: var(--brand); }
+    .app-nav li ul { border-radius: 8px; border-color: var(--line); }
+
+    /* ============ 分页导航 ============ */
+    .pagination-item-title { color: var(--brand) !important; }
+    .docsify-pagination-container {
+      border-top: 1px solid var(--line);
+      margin-top: 3rem;
+    }
+
+    /* ============ 字数统计 ============ */
+    .docsify-progress { background-image: linear-gradient(90deg, var(--brand), #5a9bd8); }
+
+    /* 滚动条 */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-thumb { background: #cbd2d9; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #9aa5b1; }
+  </style>
+</head>
+<body>
+  <div id="app">加载中 ...</div>
+
+  <script>
+    window.$docsify = {
+      name: '📘 ContentLabs 运营操作手册',
+      repo: '',
+      loadSidebar: true,
+      loadNavbar: true,
+      subMaxLevel: 3,          // 正文内自动生成 H2~H3 目录到右侧
+      maxLevel: 4,
+      auto2top: true,
+      homepage: 'README.md',
+      relativePath: false,
+      notFoundPage: false,
+
+      // 中文化的搜索
+      search: {
+        placeholder: '🔍 搜索手册内容…',
+        noData: '找不到结果，换个关键词试试',
+        depth: 4,
+        paths: 'auto',
+      },
+
+      // 复制按钮中文化
+      copyCode: {
+        buttonText: '复制',
+        errorText: '失败',
+        successText: '已复制',
+      },
+
+      // 分页导航中文化
+      pagination: {
+        previousText: '上一篇',
+        nextText: '下一篇',
+        crossChapter: true,
+        crossChapterText: true,
+      },
+
+      // 字数统计中文化
+      count: {
+        countable: true,
+        fontsize: '0.8em',
+        color: '#9aa5b1',
+        language: 'chinese',
+      },
+
+      // 给提示框 blockquote 按首个 emoji 着色
+      plugins: [
+        function (hook) {
+          hook.afterEach(function (html, next) {
+            next(html);
+          });
+          hook.doneEach(function () {
+            document.querySelectorAll('.markdown-section blockquote').forEach(function (bq) {
+              var t = bq.textContent.trim();
+              bq.classList.remove('cl-warn', 'cl-tip', 'cl-note', 'cl-key');
+              if (t.indexOf('⚠️') === 0 || t.indexOf('⚠') === 0) bq.classList.add('cl-warn');
+              else if (t.indexOf('💡') === 0) bq.classList.add('cl-tip');
+              else if (t.indexOf('📌') === 0) bq.classList.add('cl-note');
+              else if (t.indexOf('🔑') === 0) bq.classList.add('cl-key');
+            });
+          });
+        }
+      ],
+    };
+  </script>
+
+  <!-- docsify 核心（本地，离线可用） -->
+  <script src="vendor/docsify.min.js"></script>
+  <!-- 插件：全文搜索 -->
+  <script src="vendor/plugins/search.min.js"></script>
+  <!-- 插件：代码复制按钮 -->
+  <script src="vendor/plugins/docsify-copy-code.min.js"></script>
+  <!-- 插件：上一篇/下一篇 -->
+  <script src="vendor/plugins/docsify-pagination.min.js"></script>
+  <!-- 插件：阅读进度条 -->
+  <script src="vendor/plugins/progress.min.js"></script>
+  <!-- 插件：字数 / 阅读时长 -->
+  <script src="vendor/plugins/countable.min.js"></script>
+  <!-- 代码高亮：常用语言 -->
+  <script src="vendor/prism/prism-bash.min.js"></script>
+  <script src="vendor/prism/prism-json.min.js"></script>
+  <script src="vendor/prism/prism-lua.min.js"></script>
+  <script src="vendor/prism/prism-nginx.min.js"></script>
+</body>
+</html>
